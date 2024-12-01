@@ -5,7 +5,9 @@ This is a small application that helps practice your Mandarin listening comprehe
 
 Next to the smart sampling of syllables, your historical data can be displayed in a dashboard, highlighting your errors concerning three categories: Initials, finals, and tones. An example of the dashboard is shown below. 
 
-For each category, you can see the average guessing probability for each expression of the category as well as the confusion matrix. For example, in the guessing probability plot, you can see that the initial 'ch' was guessed correctly about 80% of the time, while the final 'o' was only guessed correctly 50% of the time. The red horizontal line shows the average for the whole category. The confusion matrix can give you more precise information. For example, 30% of the time 'c' as an initial was played, and a 'z' was typed instead. This corresponds to confusing 'cai' with 'zai'. Note that the x-axis shows what you have heard, while the y-axis shows what was typed by the user. Lastly, the plot on the bottom right displays your performance over time.
+For each category, you can see the average guessing probability for each expression of the category as well as the confusion matrix. For example, in the guessing probability plot, you can see that the initial _'ch'_ was guessed correctly about 80% of the time, while the final _'o'_ was only guessed correctly 50% of the time. The red horizontal line shows the average for the whole category. 
+
+The confusion matrix can give you more precise information. For example, 30% of the time _'c'_ as an initial was played, and a _'z'_ was typed instead. This corresponds to confusing '_cai'_ with _'zai'_. Note that the x-axis shows what you have heard, while the y-axis shows what was typed by the user. Lastly, the plot on the bottom right displays your performance over time.
 
 ![Dashboard example](./images/dashboard.png)
 
