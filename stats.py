@@ -35,10 +35,15 @@ class SyllableStats():
         return arr.tolist()
 
     def get_categories_from_syllable(self, syllable, replace_final_exception=False):
+        # TODO: This would not need some proper regex to handle weird input.
         if syllable == '':
             return '', '', ''
-        syllable_wo_num, num = syllable[:-1], syllable[-1:]
-        tone = int(num)
+        try:
+            tone = int(syllable[-1:])
+            syllable_wo_num = syllable[:-1]
+        except:
+            tone = ''
+            syllable_wo_num = syllable
 
         for initial in self.initials:
             if initial == syllable_wo_num[:len(initial)]:
