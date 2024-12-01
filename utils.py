@@ -1,9 +1,11 @@
 import os
+import sys
 import csv
 import requests
 from pydub import AudioSegment
 from io import BytesIO
 from datetime import datetime
+from pydub.playback import play
 
 params = {
     'key': '4QZ4D8ufYnwWF&t1eJ#ar9X#$avrsa&$jKh8erfZrsSjT#A2qvzpRLwSRBtm',
@@ -49,3 +51,21 @@ def get_syllable(syllable, variant):
         return None
 
     return audio_segment
+
+def suppress_stdout_stderr():
+    null_fds = [os.open(os.devnull, os.O_RDWR) for _ in range(2)]
+    save_fds = (os.dup(1), os.dup(2))
+    os.dup2(null_fds[0], 1)
+    os.dup2(null_fds[1], 2)
+    return save_fds, null_fds
+
+def restore_stdout_stderr(save_fds, null_fds):
+    os.dup2(save_fds[0], 1)
+    os.dup2(save_fds[1], 2)
+    os.close(null_fds[0])
+    os.close(null_fds[1])
+
+def play_audio(audio_segment):
+    save_fds, null_fds = suppress_stdout_stderr()
+    play(audio_segment)
+    restore_stdout_stderr(save_fds, null_fds)

@@ -1,7 +1,6 @@
 import os
 from time import sleep
 from stats import SyllableStats
-from pydub.playback import play
 import argparse
 from utils import *
 from data import *
@@ -33,7 +32,7 @@ def run():
             current_audio_segment = get_syllable(current_target, variant)
             if current_audio_segment is None:
                 continue
-            play(current_audio_segment)
+            play_audio(current_audio_segment)
             fetch_new = False
         
         current_written = input().strip().lower()
@@ -45,30 +44,30 @@ def run():
 
         elif current_written == 'give up' or current_written == 'giveup':
             print(f'  Solution was: {current_target}.')
-            play(current_audio_segment)
+            play_audio(current_audio_segment)
             sleep(0.3)
             correct = 2
             fetch_new = True
 
         elif current_written == 'break':
             skip = True
-            play(current_audio_segment)
+            play_audio(current_audio_segment)
 
         elif current_written == '':
             print('  repeating syllable ... 🔊.')
-            play(current_audio_segment)
+            play_audio(current_audio_segment)
             correct = 0
 
         elif current_written != current_target:
             if current_written in stats.possible_syllables:
                 print('  wrong, that would be ... 🔊')
                 current_written_audio_segment = get_syllable(current_written, variant)
-                play(current_written_audio_segment)
+                play_audio(current_written_audio_segment)
                 sleep(0.3)
                 print('  but it is the following instead ... 🔊')
             else:
                 print('  syllable does not exists.')
-            play(current_audio_segment)
+            play_audio(current_audio_segment)
             correct = 0
 
         elif current_written == current_target:
