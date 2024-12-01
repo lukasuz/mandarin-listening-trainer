@@ -21,7 +21,7 @@ For each category, you can see the average guessing probability for each express
 
 ```pip install -e ./```
 
-Alternatively, you can run the ```train.py``` or ```stats.py``` directly after installing the dependencies. For dependencies, check the setup.py.
+Alternatively, you can run the ```train.py``` or ```stats.py``` directly after installing the dependencies with ```pip install -r requirements.txt```.
 
 ### Option 2: You do not know how to use git and Python
 
@@ -31,7 +31,6 @@ After installation, click the green 'Code' button to download the repository and
 ![Manual download instructions](./images/download_zip.png)
 
 Then, open your terminal or command prompt, and navigate to this folder. If you do not know how to do this check here for [Windows](https://www.wikihow.com/Change-Directories-in-Command-Prompt), [Linux](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal), or [MacOs](https://www.macworld.com/article/221277/command-line-navigating-files-folders-mac-terminal.html). Once in the folder, install the application by typing the following command into the terminal: ```pip install -e ./```. Now you will be able to start the app from anywhere by using the terminal. Check the next section for how to do so.
-
 
 ## Usage
 After installation, you can run the following two commands to either start the training or plot your training dashboard.
