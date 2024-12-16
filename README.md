@@ -1,5 +1,5 @@
 ## What Is This?
-**_This app needs an active internet connection because it accesses the sound files from the internet._**
+**_Disclaimer: This app needs an active internet connection because it accesses the sound files from the internet._**
 
 This is a small application that helps practice your Mandarin listening comprehension by transcribing audio to pinyin. It locally tracks all of the errors you make during transcription and will more frequently present the syllables you struggled with. For example, if you struggle with the initial 'zh' over time, the app will play you more syllables containing this initial, e.g. 'zhu', 'zhang', 'zhou' etc. This sampling logic is not only applied to initials but also to finals *(e.g. 'ang', 'en', etc.)* and tones *(1,2,3,4)*. See the example below on how the app works.
 
