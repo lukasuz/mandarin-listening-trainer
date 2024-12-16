@@ -14,12 +14,13 @@ def run():
 
     if not os.path.exists(args.interactions_path):
         with open(args.interactions_path, 'w'): pass
-
-    print("Checking sound file server...")
-    message, code = init_request()
-    print(message)
+    
+    CLIWriter.print("Checking sound file server.")
+    CLIWriter.print("Do not forget that you need an active internet connection.")
+    message, code = Request.init_request()
+    CLIWriter.print(message)
     if code != 200:
-        print("Try again later.")
+        CLIWriter.print("Try again later.")
         return
     
     stats = SyllableStats(syllables=SYLLABLES, variants=VARIANTS, interactions_path=args.interactions_path)
@@ -29,9 +30,11 @@ def run():
             current_target, variant = stats.get_rnd_syllable(1, advanced=args.worst_100_only, non_sampled_boost=args.non_sampled_boost)
             current_target, variant = current_target[0], variant[0]
             mf, voice = variant.split('V')
-            current_audio_segment = get_syllable(current_target, variant)
-            if current_audio_segment is None:
-                continue
+            try:
+                current_audio_segment = Request.get_syllable(current_target, variant)
+                Request.set_initial_time()
+            except DownloadException:
+                sys.exit()
             play_audio(current_audio_segment)
             fetch_new = False
         
@@ -39,11 +42,11 @@ def run():
         
         skip = False
         if current_written == 'exit':
-            print('  exiting.')
+            CLIWriter.print('exiting.', indent=True)
             break
 
         elif current_written == 'give up' or current_written == 'giveup':
-            print(f'  Solution was: {current_target}.')
+            CLIWriter.print(f'Solution was: {current_target}.', indent=True)
             play_audio(current_audio_segment)
             sleep(0.3)
             correct = 2
@@ -54,29 +57,29 @@ def run():
             play_audio(current_audio_segment)
 
         elif current_written == '':
-            print('  repeating syllable ... 🔊.')
+            CLIWriter.print('repeating syllable ... 🔊.', indent=True)
             play_audio(current_audio_segment)
             correct = 0
 
         elif current_written != current_target:
             if current_written in stats.possible_syllables:
-                print('  wrong, that would be ... 🔊')
-                current_written_audio_segment = get_syllable(current_written, variant)
+                CLIWriter.print('wrong, that would be ... 🔊', indent=True)
+                current_written_audio_segment = Request.get_syllable(current_written, variant)
                 play_audio(current_written_audio_segment)
                 sleep(0.3)
-                print('  but it is the following instead ... 🔊')
+                CLIWriter.print('but it is the following instead ... 🔊', indent=True)
             else:
-                print('  syllable does not exists.')
+                CLIWriter.print('syllable does not exists.', indent=True)
             play_audio(current_audio_segment)
             correct = 0
 
         elif current_written == current_target:
-            print('  correct.')
+            CLIWriter.print('correct.', indent=True)
             correct = 1
             fetch_new = True
         
         else:
-            print('  something unexpected happend.')
+            CLIWriter.print('something unexpected happend.', indent=True)
 
         if not skip:
             record_interaction(args.interactions_path, current_target, current_written, correct, get_time(), mf, voice)
