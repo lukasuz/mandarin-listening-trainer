@@ -44,6 +44,8 @@ After installation, you can run the following two commands to either start the t
 
 **Show your training dashboard**: ```mlplot```
 
+Note that the dashboard plotting only makes sense once you have generated some data. So get learning 🙂. 
+
 ### Basic Interaction:
 When the app starts, it will play a syllable to you. You will have to type in what you heard, e.g. ```hao3```, and confirm by pressing *enter* (3 is the tone here). If your answer is correct, the next example will be played, if your answer is incorrect, the file will be replayed. All interactions will be locally stored in a .csv file.
 
