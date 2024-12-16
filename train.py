@@ -15,8 +15,9 @@ def run():
     if not os.path.exists(args.interactions_path):
         with open(args.interactions_path, 'w'): pass
     
+    CLIWriter.print("Do not forget that you need an active internet connection to access the sound files.")
     CLIWriter.print("Checking sound file server.")
-    CLIWriter.print("Do not forget that you need an active internet connection.")
+
     message, code = Request.init_request()
     CLIWriter.print(message)
     if code != 200:
